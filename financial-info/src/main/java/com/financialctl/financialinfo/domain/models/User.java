@@ -29,7 +29,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
+    @Column(
+            name = "email",
+            unique = true
+    )
     private String email;
 
     @OneToMany(
@@ -45,6 +48,11 @@ public class User {
     private List<Income> incomes;
 
     public User() {
+    }
+
+    public User(final String name, final String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public User(final Long id, final String name, final String email, final List<Expense> expenses, final List<Income> incomes) {
