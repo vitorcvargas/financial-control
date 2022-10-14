@@ -11,8 +11,7 @@ public interface UserOpenApi {
     @Operation(summary = "Creates a new user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created"),
-            @ApiResponse(responseCode = "400", description = "User already created"),
-            @ApiResponse(responseCode = "403", description = "Forbidden")
+            @ApiResponse(responseCode = "400", description = "User already created")
     })
     ResponseEntity<String> createUser(final UserPostDto userPostDto);
 }
