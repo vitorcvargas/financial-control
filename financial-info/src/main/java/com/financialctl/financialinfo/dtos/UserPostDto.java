@@ -1,8 +1,23 @@
 package com.financialctl.financialinfo.dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotBlank;
+
 public class UserPostDto {
 
+    @NotBlank
+    @Schema(
+            description = "User name",
+            example = "Vitor"
+    )
     private String name;
+
+    @NotBlank
+    @Schema(
+            description = "User email",
+            example = "vitor@email.com"
+    )
     private String email;
 
     public UserPostDto() {
