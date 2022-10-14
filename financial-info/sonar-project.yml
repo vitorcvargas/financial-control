@@ -1,4 +1,4 @@
 sonar:
   organization: financial-control
-  projectKey: vitorcvargas_financial-control
+  projectKey: financial-info
   sources: .
