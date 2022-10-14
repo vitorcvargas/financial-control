@@ -3,7 +3,6 @@ package com.financialctl.financialinfo.domain.services;
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.domain.repositories.UserRepository;
 import com.financialctl.financialinfo.dtos.UserPostDto;
-import com.financialctl.financialinfo.mappers.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,9 +20,6 @@ class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
-
-    @Mock
-    UserMapper userMapper;
 
     @Test
     @DisplayName("Should save user when not already created")
