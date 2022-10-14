@@ -1,0 +1,4 @@
+sonar:
+  organization: financial-control
+  projectKey: vitorcvargas_financial-control
+  sources: .
