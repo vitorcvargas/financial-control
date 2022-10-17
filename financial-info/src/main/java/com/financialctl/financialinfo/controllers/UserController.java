@@ -2,14 +2,12 @@ package com.financialctl.financialinfo.controllers;
 
 import com.financialctl.financialinfo.controllers.openapi.UserOpenApi;
 import com.financialctl.financialinfo.domain.services.UserService;
-import com.financialctl.financialinfo.dtos.UserPostDto;
+import com.financialctl.financialinfo.dtos.UserPostDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -25,7 +23,7 @@ public class UserController implements UserOpenApi {
 
     @PostMapping
     @Override
-    public ResponseEntity<String> createUser(@RequestBody final UserPostDto userPostDto) {
+    public ResponseEntity<String> createUser(@RequestBody final UserPostDTO userPostDto) {
         userService.createUser(userPostDto);
         return ResponseEntity.status(CREATED).body("User created");
     }

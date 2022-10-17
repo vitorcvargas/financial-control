@@ -2,7 +2,7 @@ package com.financialctl.financialinfo.domain.services;
 
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.domain.repositories.UserRepository;
-import com.financialctl.financialinfo.dtos.UserPostDto;
+import com.financialctl.financialinfo.dtos.UserPostDTO;
 import com.financialctl.financialinfo.mappers.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void createUser(final UserPostDto userPostDto) {
+    public void createUser(final UserPostDTO userPostDto) {
         final User user = UserMapper.INSTANCE.userPostDtoToUser(userPostDto);
         userRepository.save(user);
     }
