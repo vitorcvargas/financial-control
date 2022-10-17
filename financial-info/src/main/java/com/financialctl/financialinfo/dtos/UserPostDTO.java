@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 
-public class UserPostDto {
+public class UserPostDTO {
 
     @NotBlank
     @Schema(
@@ -20,10 +20,10 @@ public class UserPostDto {
     )
     private String email;
 
-    public UserPostDto() {
+    public UserPostDTO() {
     }
 
-    public UserPostDto(final String name, final String email) {
+    public UserPostDTO(final String name, final String email) {
         this.name = name;
         this.email = email;
     }

@@ -1,4 +1,0 @@
-sonar:
-  organization: financial-control
-  projectKey: financial-info
-  sources: .

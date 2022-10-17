@@ -2,7 +2,7 @@ package com.financialctl.financialinfo.domain.services;
 
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.domain.repositories.UserRepository;
-import com.financialctl.financialinfo.dtos.UserPostDto;
+import com.financialctl.financialinfo.dtos.UserPostDTO;
 import com.financialctl.financialinfo.mappers.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class UserServiceTest {
     @Test
     @DisplayName("Should save user when not already created")
     void shouldSaveUserWhenNotAlreadyCreated() {
-        final UserPostDto userPostDto = new UserPostDto("Vitor", "vitor@email.com");
+        final UserPostDTO userPostDto = new UserPostDTO("Vitor", "vitor@email.com");
 
         userService.createUser(userPostDto);
 
