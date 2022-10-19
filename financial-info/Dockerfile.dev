@@ -1,0 +1,5 @@
+FROM openjdk:17-alpine
+
+COPY target/financial-info-0.0.1-SNAPSHOT.jar financial-info.jar
+
+ENTRYPOINT ["java","-jar","/financial-info.jar"]

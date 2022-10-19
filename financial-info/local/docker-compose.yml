@@ -1,6 +1,24 @@
 version: "3.8"
 
 services:
+  financial-info-api:
+    depends_on:
+      - mysql
+    build:
+      context: ../
+      dockerfile: Dockerfile.dev
+    restart: on-failure
+    ports:
+      - 8080:8080
+      - 5005:5005
+    networks:
+      - financial-info
+    environment:
+      - FINANCIAL_INFO_DB_URL=jdbc:mysql://mysql:3306/financial_info?useSSL=false
+      - FINANCIAL_INFO_DB_USERNAME=root
+      - FINANCIAL_INFO_DB_PASSWORD=root
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+
   mysql:
     image: mysql:5.7
     restart: unless-stopped
@@ -9,3 +27,9 @@ services:
       - MYSQL_DATABASE=financial_info
     ports:
       - 3307:3306
+    networks:
+      - financial-info
+
+networks:
+  financial-info:
+    driver: bridge
