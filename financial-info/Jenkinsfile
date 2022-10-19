@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage ('Init') {
+        stage ('Build Image') {
             steps {
-                echo 'Hello world'
+                script {
+                    dockerapp = docker.build('vitorcvargas/financial-info-api', '-f ./financial-info/Dockerfile ./financial-info')
+                }
             }
         }
     }
