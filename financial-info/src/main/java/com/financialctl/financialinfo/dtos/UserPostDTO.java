@@ -43,4 +43,12 @@ public class UserPostDTO {
     public void setEmail(final String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "UserPostDTO{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
