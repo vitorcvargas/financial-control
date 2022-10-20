@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static com.financialctl.financialinfo.utils.ApiConstants.REQUEST_RECEIVED;
 import static com.financialctl.financialinfo.utils.ApiConstants.REQUEST_RESPONSE_WITH_BODY;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -28,7 +30,7 @@ public class UserController implements UserOpenApi {
 
     @PostMapping
     @Override
-    public ResponseEntity<String> createUser(@RequestBody final UserPostDTO userPostDto) {
+    public ResponseEntity<String> createUser(@Valid @RequestBody final UserPostDTO userPostDto) {
         log.info(REQUEST_RECEIVED, "createUser", "POST", userPostDto);
         userService.createUser(userPostDto);
         final String response = "User created";

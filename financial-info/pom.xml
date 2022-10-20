@@ -82,6 +82,13 @@
 			<version>${springboot.version}</version>
 		</dependency>
 
+		<!-- VALIDATION -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
