@@ -1,5 +1,6 @@
 package com.financialctl.financialinfo.controllers.openapi;
 
+import com.financialctl.financialinfo.dtos.UserDto;
 import com.financialctl.financialinfo.dtos.UserPostDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,5 +15,5 @@ public interface UserOpenApi {
             @ApiResponse(responseCode = "400", description = "User already created"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    ResponseEntity<String> createUser(final UserPostDTO userPostDto);
+    ResponseEntity<UserDto> createUser(final UserPostDTO userPostDto);
 }
