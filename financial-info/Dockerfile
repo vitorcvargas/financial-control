@@ -4,6 +4,6 @@ WORKDIR /financial-info
 
 COPY . .
 
-RUN mvn clean install
+RUN mvn clean install -DskipTests
 
 ENTRYPOINT ["java", "-jar", "target/financial-info-0.0.1-SNAPSHOT.jar"]

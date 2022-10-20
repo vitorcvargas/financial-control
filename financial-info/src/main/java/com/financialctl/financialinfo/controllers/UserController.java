@@ -2,6 +2,7 @@ package com.financialctl.financialinfo.controllers;
 
 import com.financialctl.financialinfo.controllers.openapi.UserOpenApi;
 import com.financialctl.financialinfo.domain.services.UserService;
+import com.financialctl.financialinfo.dtos.UserDTO;
 import com.financialctl.financialinfo.dtos.UserPostDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +31,12 @@ public class UserController implements UserOpenApi {
 
     @PostMapping
     @Override
-    public ResponseEntity<String> createUser(@Valid @RequestBody final UserPostDTO userPostDto) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody final UserPostDTO userPostDto) {
         logger.info(REQUEST_RECEIVED, "createUser", "POST", userPostDto);
 
-        userService.createUser(userPostDto);
+        final UserDTO newUser = userService.createUser(userPostDto);
 
-        final String response = "User created";
-        logger.info(REQUEST_RESPONSE_WITH_BODY, "createUser", CREATED.value(), response);
-        return ResponseEntity.status(CREATED).body(response);
+        logger.info(REQUEST_RESPONSE_WITH_BODY, "createUser", CREATED.value(), newUser);
+        return ResponseEntity.status(CREATED).body(newUser);
     }
 }
