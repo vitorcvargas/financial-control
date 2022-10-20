@@ -2,7 +2,7 @@ package com.financialctl.financialinfo.domain.services;
 
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.domain.repositories.UserRepository;
-import com.financialctl.financialinfo.dtos.UserDto;
+import com.financialctl.financialinfo.dtos.UserDTO;
 import com.financialctl.financialinfo.dtos.UserPostDTO;
 import com.financialctl.financialinfo.exceptions.BadRequestException;
 import com.financialctl.financialinfo.mappers.UserMapper;
@@ -19,7 +19,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDto createUser(final UserPostDTO userPostDto) {
+    public UserDTO createUser(final UserPostDTO userPostDto) {
         try {
             final User user = UserMapper.INSTANCE.userPostDtoToUser(userPostDto);
 

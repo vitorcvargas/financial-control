@@ -2,7 +2,7 @@ package com.financialctl.financialinfo.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public class UserDto {
+public class UserDTO {
 
     @Schema(
             description = "User name",
@@ -16,7 +16,7 @@ public class UserDto {
     )
     private String email;
 
-    public UserDto(final String name, final String email) {
+    public UserDTO(final String name, final String email) {
         this.name = name;
         this.email = email;
     }
