@@ -29,7 +29,9 @@
             **/models/enums/*java,
             **/*DTO.java,
             **/mappers/*.java,
-            **/config/**/*.*
+            **/config/**/*.*,
+            **/utils/**/*.*,
+            **/exceptions/**/*.*
         </sonar.source.exclusions>
         <aggregate.report.dir>target/site/jacoco/jacoco.xml</aggregate.report.dir>
     </properties>
