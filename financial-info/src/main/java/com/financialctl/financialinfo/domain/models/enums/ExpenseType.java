@@ -19,14 +19,14 @@ public enum ExpenseType {
     private int type;
 
     public ExpenseType fromValue(final int value) {
-        for(ExpenseType expenseType : ExpenseType.values()) {
-            if(expenseType.getType() == value)
+        for (ExpenseType expenseType : ExpenseType.values()) {
+            if (expenseType.getType() == value)
                 return expenseType;
         }
         return null;
     }
 
-    private ExpenseType(final int type) {
+    ExpenseType(final int type) {
         this.type = type;
     }
 

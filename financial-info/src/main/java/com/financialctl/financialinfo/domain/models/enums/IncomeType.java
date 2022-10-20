@@ -12,7 +12,7 @@ public enum IncomeType {
 
     private int type;
 
-    private IncomeType(final int type) {
+    IncomeType(final int type) {
         this.type = type;
     }
 
