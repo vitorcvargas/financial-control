@@ -1,50 +1,14 @@
 package com.financialctl.financialinfo.domain.models;
 
-import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity
-@Table(name = "user")
 public class User {
 
-    @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "user_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
     private Long id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(
-            name = "email",
-            unique = true
-    )
     private String email;
-
-    @OneToMany(
-            cascade = ALL,
-            mappedBy = "user"
-    )
     private List<Expense> expenses;
-
-    @OneToMany(
-            cascade = ALL,
-            mappedBy = "user"
-    )
     private List<Income> incomes;
 
     public User() {

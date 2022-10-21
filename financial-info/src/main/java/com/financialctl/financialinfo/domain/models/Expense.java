@@ -1,64 +1,18 @@
 package com.financialctl.financialinfo.domain.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.financialctl.financialinfo.domain.models.enums.ExpenseType;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
-import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity
-@Table(name = "expense")
 public class Expense {
 
-    @Id
-    @SequenceGenerator(
-            name = "expense_sequence",
-            sequenceName = "expense_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "expense_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+
     private Long id;
-
-    @Column(
-            name = "type",
-            nullable = false
-    )
     private ExpenseType type;
-
-    @Column(
-            name = "amount",
-            nullable = false
-    )
     private Double amount;
-
-    @Column(
-            name = "description",
-            nullable = false
-    )
     private String description;
-
-    @Column(
-            name = "date",
-            nullable = false
-    )
     private ZonedDateTime date;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "user_id",
-            nullable = false
-    )
-    @JsonBackReference
     private User user;
 
     public Expense() {

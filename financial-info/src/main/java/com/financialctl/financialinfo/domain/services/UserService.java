@@ -1,17 +1,13 @@
 package com.financialctl.financialinfo.domain.services;
 
+import com.financialctl.financialinfo.application.ports.inbound.CRUDService;
+import com.financialctl.financialinfo.application.ports.outbound.repositories.UserRepository;
 import com.financialctl.financialinfo.domain.models.User;
-import com.financialctl.financialinfo.domain.repositories.UserRepository;
-import com.financialctl.financialinfo.dtos.UserDTO;
-import com.financialctl.financialinfo.dtos.UserPostDTO;
-import com.financialctl.financialinfo.exceptions.BadRequestException;
-import com.financialctl.financialinfo.mappers.UserMapper;
+import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.BadRequestException;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
 
 
-@Service
-public class UserService {
+public class UserService implements CRUDService<User, User> {
 
     private final UserRepository userRepository;
 
@@ -19,15 +15,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO createUser(final UserPostDTO userPostDto) {
+    @Override
+    public User save(final User user) {
         try {
-            final User user = UserMapper.INSTANCE.userPostDtoToUser(userPostDto);
-
-            final User newUser = userRepository.save(user);
-
-            return UserMapper.INSTANCE.userToUserDto(newUser);
+            return userRepository.save(user);
         } catch (DataIntegrityViolationException ex) {
-            throw BadRequestException.userAlreadyCreated(userPostDto.getEmail());
+            throw BadRequestException.userAlreadyCreated(user.getEmail());
         }
     }
 }
