@@ -24,14 +24,9 @@
         <sonar.version>3.7.0.1746</sonar.version>
         <sonar.source.exclusions>
             **/FinancialInfoApplication.java,
-            **/models/*.java,
-            **/controllers/**/*.*,
-            **/models/enums/*java,
-            **/*DTO.java,
-            **/mappers/*.java,
-            **/config/**/*.*,
-            **/utils/**/*.*,
-            **/exceptions/**/*.*
+            **/application/**/*.*,
+            **/infrastructure/**/*.*,
+            **/models/**/*.*
         </sonar.source.exclusions>
         <aggregate.report.dir>target/site/jacoco/jacoco.xml</aggregate.report.dir>
     </properties>
