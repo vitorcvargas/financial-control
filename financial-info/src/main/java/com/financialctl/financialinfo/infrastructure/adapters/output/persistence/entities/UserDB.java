@@ -1,7 +1,9 @@
-package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entity;
+package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -35,32 +37,22 @@ public class UserDB {
     )
     private String email;
 
-    @OneToMany(
-            cascade = ALL,
-            mappedBy = "userDB"
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "finance_id",
+            referencedColumnName = "id"
     )
-    private List<ExpenseDB> expens;
-
-    @OneToMany(
-            cascade = ALL,
-            mappedBy = "userDB"
-    )
-    private List<IncomeDB> incomeDBS;
+    @JsonManagedReference
+    private FinanceDB finance;
 
     public UserDB() {
     }
 
-    public UserDB(final String name, final String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    public UserDB(final Long id, final String name, final String email, final List<ExpenseDB> expens, final List<IncomeDB> incomeDBS) {
+    public UserDB(final Long id, final String name, final String email, final FinanceDB finance) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.expens = expens;
-        this.incomeDBS = incomeDBS;
+        this.finance = finance;
     }
 
     public Long getId() {
@@ -87,30 +79,21 @@ public class UserDB {
         this.email = email;
     }
 
-    public List<ExpenseDB> getExpenses() {
-        return expens;
+    public FinanceDB getFinance() {
+        return finance;
     }
 
-    public void setExpenses(final List<ExpenseDB> expens) {
-        this.expens = expens;
-    }
-
-    public List<IncomeDB> getIncomes() {
-        return incomeDBS;
-    }
-
-    public void setIncomes(final List<IncomeDB> incomeDBS) {
-        this.incomeDBS = incomeDBS;
+    public void setFinance(final FinanceDB finance) {
+        this.finance = finance;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDB{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", expenses=" + expens +
-                ", incomes=" + incomeDBS +
+                ", finance=" + finance +
                 '}';
     }
 }

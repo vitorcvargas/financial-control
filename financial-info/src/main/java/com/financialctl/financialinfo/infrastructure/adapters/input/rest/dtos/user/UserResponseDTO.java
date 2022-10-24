@@ -5,6 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class UserResponseDTO {
 
     @Schema(
+            description = "User id",
+            example = "1"
+    )
+    private Long id;
+
+    @Schema(
             description = "User name",
             example = "Vitor"
     )
@@ -16,7 +22,8 @@ public class UserResponseDTO {
     )
     private String email;
 
-    public UserResponseDTO(final String name, final String email) {
+    public UserResponseDTO(final Long id, final String name, final String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
@@ -37,10 +44,19 @@ public class UserResponseDTO {
         this.email = email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "UserDto{" +
-                "name='" + name + '\'' +
+        return "UserResponseDTO{" +
+                "userId=" + id +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
