@@ -1,4 +1,4 @@
-package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.config.mysql.converters;
+package com.financialctl.financialinfo.infrastructure.config.mysql;
 
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.enums.OperationEntryDB;
 
