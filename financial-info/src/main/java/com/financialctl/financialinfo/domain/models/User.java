@@ -1,30 +1,31 @@
 package com.financialctl.financialinfo.domain.models;
 
-import java.util.List;
-
-
 public class User {
 
     private Long id;
     private String name;
     private String email;
-    private List<Expense> expenses;
-    private List<Income> incomes;
+    private Finance finance;
+
+    public void addFinance(final Finance finance) {
+        finance.setUser(this);
+        this.setFinance(finance);
+    }
 
     public User() {
     }
 
-    public User(final String name, final String email) {
+    public User(final String name, final String email, final Finance finance) {
         this.name = name;
         this.email = email;
+        this.finance = finance;
     }
 
-    public User(final Long id, final String name, final String email, final List<Expense> expenses, final List<Income> incomes) {
+    public User(final Long id, final String name, final String email, final Finance finance) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.expenses = expenses;
-        this.incomes = incomes;
+        this.finance = finance;
     }
 
     public Long getId() {
@@ -51,20 +52,12 @@ public class User {
         this.email = email;
     }
 
-    public List<Expense> getExpenses() {
-        return expenses;
+    public Finance getFinance() {
+        return finance;
     }
 
-    public void setExpenses(final List<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public List<Income> getIncomes() {
-        return incomes;
-    }
-
-    public void setIncomes(final List<Income> incomes) {
-        this.incomes = incomes;
+    public void setFinance(final Finance finance) {
+        this.finance = finance;
     }
 
     @Override
@@ -73,8 +66,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", expenses=" + expenses +
-                ", incomes=" + incomes +
+                ", finance=" + finance +
                 '}';
     }
 }

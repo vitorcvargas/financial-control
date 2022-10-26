@@ -1,6 +1,8 @@
 package com.financialctl.financialinfo.application.ports.inbound;
 
-public interface CRUDService<O, T> {
+public interface CRUDService<T, ID> {
 
-    T save(O obj);
+    T save(final T obj);
+
+    T get(final ID id);
 }
