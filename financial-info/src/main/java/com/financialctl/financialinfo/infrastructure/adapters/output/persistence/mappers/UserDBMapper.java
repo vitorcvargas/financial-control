@@ -12,12 +12,14 @@ public interface UserDBMapper {
     UserDBMapper INSTANCE = Mappers.getMapper(UserDBMapper.class);
 
     @Mappings({
-            @Mapping(target = "finance.user", ignore = true)
+            @Mapping(target = "finance.user", ignore = true),
+            @Mapping(target = "finance.operations", ignore = true)
     })
     UserDB userToUserDB(final User user);
 
     @Mappings({
-            @Mapping(target = "finance.user", ignore = true)
+            @Mapping(target = "finance.user", ignore = true),
+            @Mapping(target = "finance.operations", ignore = true)
     })
     User userDBToUser(final UserDB userDB);
 }

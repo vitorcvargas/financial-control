@@ -3,8 +3,7 @@ package com.financialctl.financialinfo.domain.services;
 import com.financialctl.financialinfo.application.ports.inbound.FinanceServicePort;
 import com.financialctl.financialinfo.application.ports.outbound.repositories.FinanceRepository;
 import com.financialctl.financialinfo.domain.models.Finance;
-
-import java.util.Optional;
+import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.NotFoundException;
 
 public class FinanceService implements FinanceServicePort {
 
@@ -15,14 +14,8 @@ public class FinanceService implements FinanceServicePort {
     }
 
     @Override
-    public Finance save(final Finance obj) {
-        return null;
-    }
-
-    @Override
     public Finance get(final Long id) {
-        final Optional<Finance> financeOptional = financeRepository.findById(id);
-
-        return financeOptional.orElse(null);
+        return financeRepository.findById(id)
+                .orElseThrow(() -> NotFoundException.financeNotFound(id));
     }
 }

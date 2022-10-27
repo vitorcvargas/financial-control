@@ -20,21 +20,12 @@ public class FinanceRepositoryAdapter implements FinanceRepository {
 
     @Override
     public Optional<Finance> findById(final Long id) {
-        final Finance finance = financeDBToFinance(repository.findById(id).get());
-        return Optional.of(finance);
-    }
+        final Optional<FinanceDB> optional = repository.findById(id);
 
-    @Override
-    public Finance save(final Finance finance) {
-        final FinanceDB newFinanceDB = repository.save(financeToFinanceDB(finance));
-        return financeDBToFinance(newFinanceDB);
+        return Optional.ofNullable(financeDBToFinance(optional.orElse(null)));
     }
 
     private Finance financeDBToFinance(final FinanceDB financeDB) {
         return FinanceDBMapper.INSTANCE.financeDBToFinance(financeDB);
-    }
-
-    private FinanceDB financeToFinanceDB(final Finance finance) {
-        return FinanceDBMapper.INSTANCE.financeToFinanceDB(finance);
     }
 }

@@ -13,12 +13,14 @@ public interface OperationDBMapper {
     OperationDBMapper INSTANCE = Mappers.getMapper(OperationDBMapper.class);
 
     @Mappings({
-            @Mapping(target = "finance.operations", ignore = true)
+            @Mapping(target = "finance.operations", ignore = true),
+            @Mapping(target = "finance.user", ignore = true)
     })
     OperationDB operationToOperationDB(final Operation operation);
 
     @Mappings({
-            @Mapping(target = "finance.operations", ignore = true)
+            @Mapping(target = "finance.operations", ignore = true),
+            @Mapping(target = "finance.user", ignore = true)
     })
     Operation operationDBToOperation(final OperationDB operationDB);
 }

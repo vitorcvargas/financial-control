@@ -7,4 +7,6 @@ public interface CRUDRepository<T, ID> {
     T save(final T object);
 
     Optional<T> findById(final ID id);
+
+    void delete(final ID id);
 }

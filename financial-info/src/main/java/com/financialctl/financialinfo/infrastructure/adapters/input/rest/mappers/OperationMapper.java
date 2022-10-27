@@ -6,6 +6,7 @@ import com.financialctl.financialinfo.domain.models.enums.OperationEntry;
 import com.financialctl.financialinfo.infrastructure.adapters.input.rest.dtos.operation.OperationRequestDTO;
 import com.financialctl.financialinfo.infrastructure.adapters.input.rest.dtos.operation.OperationResponseDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -17,7 +18,7 @@ public interface OperationMapper {
         final Operation operation = new Operation();
         final Finance finance = new Finance();
         finance.setId(request.getFinanceId());
-        operation.setOperationEntry(OperationEntry.fromId(request.getOperationEntry()));
+        operation.setOperationEntryType(OperationEntry.fromId(request.getOperationEntryType()));
         operation.setAmount(request.getAmount());
         operation.setDate(request.getDate());
         operation.setDescription(request.getDescription());
@@ -26,5 +27,20 @@ public interface OperationMapper {
         return operation;
     }
 
+    default Operation operationRequestDTOToOperation(final OperationRequestDTO request, final Long id) {
+        final Operation operation = new Operation();
+        final Finance finance = new Finance();
+        finance.setId(request.getFinanceId());
+        operation.setId(id);
+        operation.setOperationEntryType(OperationEntry.fromId(request.getOperationEntryType()));
+        operation.setAmount(request.getAmount());
+        operation.setDate(request.getDate());
+        operation.setDescription(request.getDescription());
+        operation.setFinance(finance);
+
+        return operation;
+    }
+
+    @Mapping(target = "financeId", source = "finance.id")
     OperationResponseDTO operationToOperationResponseDTO(final Operation operation);
 }

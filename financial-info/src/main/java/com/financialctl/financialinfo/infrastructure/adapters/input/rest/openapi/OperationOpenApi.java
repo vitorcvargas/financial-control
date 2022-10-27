@@ -15,4 +15,30 @@ public interface OperationOpenApi {
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     ResponseEntity<OperationResponseDTO> createOperation(final OperationRequestDTO operationRequestDTO);
+
+    @Operation(summary = "Gets an operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Operation not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "405", description = "Method Not Allowed")
+    })
+    ResponseEntity<OperationResponseDTO> getOperation(final Long id);
+
+    @Operation(summary = "Updates an operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Operation not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    ResponseEntity<OperationResponseDTO> updateOperation(final Long id, final OperationRequestDTO operationRequestDTO);
+
+    @Operation(summary = "Deletes an operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Operation not found"),
+            @ApiResponse(responseCode = "405", description = "Method Not Allowed")
+    })
+    ResponseEntity<String> deleteOperation(final Long id);
 }

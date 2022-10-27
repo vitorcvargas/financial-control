@@ -48,7 +48,7 @@ public class OperationDB {
     private ZonedDateTime date;
 
     @Column(name = "operation")
-    private OperationEntryDB operationEntry;
+    private OperationEntryDB operationEntryType;
 
     @ManyToOne
     @JoinColumn(
@@ -61,20 +61,20 @@ public class OperationDB {
     public OperationDB() {
     }
 
-    public OperationDB(final Double amount, final String description, final ZonedDateTime date, final OperationEntryDB operationEntry, final FinanceDB finance) {
+    public OperationDB(final Double amount, final String description, final ZonedDateTime date, final OperationEntryDB operationEntryType, final FinanceDB finance) {
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.operationEntry = operationEntry;
+        this.operationEntryType = operationEntryType;
         this.finance = finance;
     }
 
-    public OperationDB(final Long id, final Double amount, final String description, final ZonedDateTime date, final OperationEntryDB operationEntry, final FinanceDB finance) {
+    public OperationDB(final Long id, final Double amount, final String description, final ZonedDateTime date, final OperationEntryDB operationEntryType, final FinanceDB finance) {
         this.id = id;
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.operationEntry = operationEntry;
+        this.operationEntryType = operationEntryType;
         this.finance = finance;
     }
 
@@ -110,12 +110,12 @@ public class OperationDB {
         this.date = date;
     }
 
-    public OperationEntryDB getOperationEntry() {
-        return operationEntry;
+    public OperationEntryDB getOperationEntryType() {
+        return operationEntryType;
     }
 
-    public void setOperationEntry(final OperationEntryDB operationEntry) {
-        this.operationEntry = operationEntry;
+    public void setOperationEntryType(final OperationEntryDB operationEntryType) {
+        this.operationEntryType = operationEntryType;
     }
 
     public FinanceDB getFinance() {
@@ -133,7 +133,7 @@ public class OperationDB {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", date=" + date +
-                ", operationEntry=" + operationEntry +
+                ", operationEntry=" + operationEntryType +
                 ", finance=" + finance +
                 '}';
     }

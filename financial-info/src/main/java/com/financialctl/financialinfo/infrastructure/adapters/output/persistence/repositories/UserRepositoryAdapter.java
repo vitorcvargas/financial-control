@@ -26,8 +26,14 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public Optional<User> findById(final Long id) {
-        final User user = userDBToUser(repository.findById(id).get());
-        return Optional.of(user);
+        final Optional<UserDB> optional = repository.findById(id);
+
+        return Optional.ofNullable(userDBToUser(optional.orElse(null)));
+    }
+
+    @Override
+    public void delete(final Long id) {
+        repository.deleteById(id);
     }
 
     private User userDBToUser(final UserDB userDB) {

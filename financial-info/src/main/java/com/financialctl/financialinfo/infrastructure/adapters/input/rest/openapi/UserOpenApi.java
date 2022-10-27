@@ -16,4 +16,30 @@ public interface UserOpenApi {
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     ResponseEntity<UserResponseDTO> createUser(final UserRequestDTO userPostDto);
+
+    @Operation(summary = "Gets an user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "405", description = "Method Not Allowed")
+    })
+    ResponseEntity<UserResponseDTO> getUser(final Long id);
+
+    @Operation(summary = "Updates an user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    ResponseEntity<UserResponseDTO> updateUser(final Long id, final UserRequestDTO userPostDto);
+
+    @Operation(summary = "Deletes an user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "405", description = "Method Not Allowed")
+    })
+    ResponseEntity<String> deleteUser(final Long id);
 }

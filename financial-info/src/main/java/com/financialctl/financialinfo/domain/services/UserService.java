@@ -5,6 +5,7 @@ import com.financialctl.financialinfo.application.ports.outbound.repositories.Us
 import com.financialctl.financialinfo.domain.models.Finance;
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.BadRequestException;
+import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.NotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Optional;
@@ -31,9 +32,31 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public User get(final Long id) {
+    public User update(final User user) {
+        final User userToUpdate = get(user.getId());
+
+        updateValues(user, userToUpdate);
+
+        return userRepository.save(userToUpdate);
+    }
+
+    @Override
+    public void delete(final Long id) {
         final Optional<User> userOptional = userRepository.findById(id);
 
-        return userOptional.orElse(null);
+        if (userOptional.isEmpty())
+            throw NotFoundException.userNotFound(id);
+
+        userRepository.delete(id);
+    }
+
+    private void updateValues(final User user, final User userToUpdate) {
+        userToUpdate.setName(user.getName());
+    }
+
+    @Override
+    public User get(final Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> NotFoundException.userNotFound(id));
     }
 }

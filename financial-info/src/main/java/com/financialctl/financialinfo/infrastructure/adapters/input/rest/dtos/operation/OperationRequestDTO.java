@@ -35,11 +35,11 @@ public class OperationRequestDTO {
 
     @NotNull
     @Schema(
-            description = "Operation entry id",
+            description = "Operation entry type",
             example = "1"
     )
     @JsonProperty("operation_entry")
-    private int operationEntry;
+    private int operationEntryType;
 
     @NotNull
     @Schema(
@@ -52,11 +52,11 @@ public class OperationRequestDTO {
     public OperationRequestDTO() {
     }
 
-    public OperationRequestDTO(final Double amount, final String description, final ZonedDateTime date, final int operationEntry, final Long financeId) {
+    public OperationRequestDTO(final Double amount, final String description, final ZonedDateTime date, final int operationEntryType, final Long financeId) {
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.operationEntry = operationEntry;
+        this.operationEntryType = operationEntryType;
         this.financeId = financeId;
     }
 
@@ -84,12 +84,12 @@ public class OperationRequestDTO {
         this.date = date;
     }
 
-    public int getOperationEntry() {
-        return operationEntry;
+    public int getOperationEntryType() {
+        return operationEntryType;
     }
 
-    public void setOperationEntry(final int operationEntry) {
-        this.operationEntry = operationEntry;
+    public void setOperationEntryType(final int operationEntryType) {
+        this.operationEntryType = operationEntryType;
     }
 
     public Long getFinanceId() {
@@ -106,7 +106,7 @@ public class OperationRequestDTO {
                 "amount=" + amount +
                 ", description='" + description + '\'' +
                 ", date=" + date +
-                ", operationEntry=" + operationEntry +
+                ", operationEntry=" + operationEntryType +
                 ", financeId=" + financeId +
                 '}';
     }

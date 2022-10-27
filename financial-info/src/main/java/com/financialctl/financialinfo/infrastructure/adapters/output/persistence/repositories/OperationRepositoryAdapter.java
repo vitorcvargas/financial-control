@@ -26,8 +26,14 @@ public class OperationRepositoryAdapter implements OperationRepository {
 
     @Override
     public Optional<Operation> findById(final Long id) {
-        final Operation operation = operationDBToOperation(repository.findById(id).get());
-        return Optional.of(operation);
+        final Optional<OperationDB> optional = repository.findById(id);
+
+        return Optional.ofNullable(operationDBToOperation(optional.orElse(null)));
+    }
+
+    @Override
+    public void delete(final Long id) {
+        repository.deleteById(id);
     }
 
     private Operation operationDBToOperation(final OperationDB operationDB) {

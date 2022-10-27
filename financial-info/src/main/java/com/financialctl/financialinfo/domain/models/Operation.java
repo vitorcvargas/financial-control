@@ -10,26 +10,26 @@ public class Operation {
     private Double amount;
     private String description;
     private ZonedDateTime date;
-    private OperationEntry operationEntry;
+    private OperationEntry operationEntryType;
     private Finance finance;
 
     public Operation() {
     }
 
-    public Operation(final Double amount, final String description, final ZonedDateTime date, final OperationEntry operationEntry, final Finance finance) {
+    public Operation(final Double amount, final String description, final ZonedDateTime date, final OperationEntry operationEntryType, final Finance finance) {
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.operationEntry = operationEntry;
+        this.operationEntryType = operationEntryType;
         this.finance = finance;
     }
 
-    public Operation(final Long id, final Double amount, final String description, final ZonedDateTime date, final OperationEntry operationEntry, final Finance finance) {
+    public Operation(final Long id, final Double amount, final String description, final ZonedDateTime date, final OperationEntry operationEntryType, final Finance finance) {
         this.id = id;
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.operationEntry = operationEntry;
+        this.operationEntryType = operationEntryType;
         this.finance = finance;
     }
 
@@ -65,12 +65,12 @@ public class Operation {
         this.date = date;
     }
 
-    public OperationEntry getOperationEntry() {
-        return operationEntry;
+    public OperationEntry getOperationEntryType() {
+        return operationEntryType;
     }
 
-    public void setOperationEntry(final OperationEntry operationEntry) {
-        this.operationEntry = operationEntry;
+    public void setOperationEntryType(final OperationEntry operationEntryType) {
+        this.operationEntryType = operationEntryType;
     }
 
     public Finance getFinance() {
@@ -88,7 +88,7 @@ public class Operation {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", date=" + date +
-                ", operationEntry=" + operationEntry +
+                ", operationEntry=" + operationEntryType +
                 ", finance=" + finance +
                 '}';
     }

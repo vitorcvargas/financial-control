@@ -4,6 +4,7 @@ import com.financialctl.financialinfo.application.ports.inbound.FinanceServicePo
 import com.financialctl.financialinfo.application.ports.outbound.repositories.OperationRepository;
 import com.financialctl.financialinfo.domain.models.Finance;
 import com.financialctl.financialinfo.domain.models.Operation;
+import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -52,13 +55,91 @@ class OperationServiceTest {
     }
 
     @Test
-    @DisplayName("Should return operation when operation object is present")
-    void shouldReturnFinanceWhenFinanceObjectIsPresent() {
+    @DisplayName("Should update operation when operation exists")
+    void shouldUpdateOperationWhenOperationExists() {
+
+        Operation operation = new Operation();
+        operation.setId(1L);
+
+        when(operationRepository.findById(anyLong()))
+                .thenReturn(Optional.of(new Operation()));
+        when(operationRepository.save(any(Operation.class)))
+                .thenReturn(new Operation());
+
+        operationService.update(operation);
+
+        verify(operationRepository, times(1))
+                .save(any(Operation.class));
+    }
+
+    @Test
+    @DisplayName("Should throw NotFoundException when operation does not exist in update flow")
+    void shouldThrowNotFoundExceptionWhenOperationDoesNotExistInUpdateFlow() {
+        final Operation operation = new Operation();
+        operation.setId(1L);
+
+        when(operationRepository.findById(anyLong()))
+                .thenReturn(Optional.ofNullable(null));
+
+        final NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> operationService.update(operation));
+
+        assertThat(notFoundException.getMessage()).isEqualTo("Operation not found with id 1.");
+
+        verify(operationRepository, times(0))
+                .save(any(Operation.class));
+    }
+
+    @Test
+    @DisplayName("Should delete operation when operation exists")
+    void shouldDeleteOperationWhenOperationExists() {
+
+        when(operationRepository.findById(anyLong()))
+                .thenReturn(Optional.of(new Operation()));
+
+        operationService.delete(1L);
+
+        verify(operationRepository, times(1))
+                .delete(anyLong());
+    }
+
+    @Test
+    @DisplayName("Should throw NotFoundException when operation does not exist in delete flow")
+    void shouldThrowNotFoundExceptionWhenOperationDoesNotExistInDeleteFlow() {
+
+        when(operationRepository.findById(anyLong()))
+                .thenReturn(Optional.ofNullable(null));
+
+        final NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> operationService.delete(1L));
+
+        assertThat(notFoundException.getMessage()).isEqualTo("Operation not found with id 1.");
+
+        verify(operationRepository, times(0))
+                .delete(anyLong());
+    }
+
+    @Test
+    @DisplayName("Should return operation when operation is present")
+    void shouldReturnOperationWhenOperationIsPresent() {
 
         when(operationRepository.findById(anyLong()))
                 .thenReturn(Optional.of(new Operation()));
 
         operationService.get(1L);
+
+        verify(operationRepository, times(1))
+                .findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("Should throw NotFoundException when operation does not exist")
+    void shouldThrowNotFoundExceptionWhenOperationDoesNotExist() {
+
+        when(operationRepository.findById(anyLong()))
+                .thenReturn(Optional.ofNullable(null));
+
+        final NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> operationService.get(1L));
+
+        assertThat(notFoundException.getMessage()).isEqualTo("Operation not found with id 1.");
 
         verify(operationRepository, times(1))
                 .findById(anyLong());

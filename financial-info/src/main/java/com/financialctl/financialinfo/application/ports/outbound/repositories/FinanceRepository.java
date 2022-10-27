@@ -2,5 +2,8 @@ package com.financialctl.financialinfo.application.ports.outbound.repositories;
 
 import com.financialctl.financialinfo.domain.models.Finance;
 
-public interface FinanceRepository extends CRUDRepository<Finance, Long> {
+import java.util.Optional;
+
+public interface FinanceRepository {
+    Optional<Finance> findById(final Long id);
 }
