@@ -20,6 +20,9 @@ public class UserRequestDTO {
     )
     private String email;
 
+    public UserRequestDTO() {
+    }
+
     public UserRequestDTO(final String name, final String email) {
         this.name = name;
         this.email = email;
