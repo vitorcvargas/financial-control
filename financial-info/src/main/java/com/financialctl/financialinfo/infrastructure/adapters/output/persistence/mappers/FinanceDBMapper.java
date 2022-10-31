@@ -7,18 +7,20 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = UserDBMapper.class)
+@Mapper
 public interface FinanceDBMapper {
 
     FinanceDBMapper INSTANCE = Mappers.getMapper(FinanceDBMapper.class);
 
     @Mappings({
-            @Mapping(target = "user.finance", ignore = true)
+            @Mapping(target = "user.finance", ignore = true),
+            @Mapping(target = "operations", ignore = true)
     })
     FinanceDB financeToFinanceDB(final Finance finance);
 
     @Mappings({
-            @Mapping(target = "user.finance", ignore = true)
+            @Mapping(target = "user.finance", ignore = true),
+            @Mapping(target = "operations", ignore = true)
     })
     Finance financeDBToFinance(final FinanceDB financeDB);
 }

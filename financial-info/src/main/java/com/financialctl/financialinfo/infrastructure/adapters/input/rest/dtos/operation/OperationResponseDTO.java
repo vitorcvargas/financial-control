@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.financialctl.financialinfo.domain.models.enums.OperationEntry;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.ZonedDateTime;
+import javax.validation.constraints.NotNull;
 
 public class OperationResponseDTO {
 
@@ -26,11 +26,12 @@ public class OperationResponseDTO {
     )
     private String description;
 
+    @NotNull
     @Schema(
             description = "Operation date",
-            example = "2020-07-03@01:03:34.467+08:00"
+            example = "2020-07-03TAmerica/Sao_Paulo"
     )
-    private ZonedDateTime date;
+    private String date;
 
     @Schema(
             description = "Operation entry type",
@@ -49,7 +50,7 @@ public class OperationResponseDTO {
     public OperationResponseDTO() {
     }
 
-    public OperationResponseDTO(final Long id, final Double amount, final String description, final ZonedDateTime date, final OperationEntry operationEntryType, final Long financeId) {
+    public OperationResponseDTO(final Long id, final Double amount, final String description, final String date, final OperationEntry operationEntryType, final Long financeId) {
         this.id = id;
         this.amount = amount;
         this.description = description;
@@ -82,11 +83,11 @@ public class OperationResponseDTO {
         this.description = description;
     }
 
-    public ZonedDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(final ZonedDateTime date) {
+    public void setDate(final String date) {
         this.date = date;
     }
 
