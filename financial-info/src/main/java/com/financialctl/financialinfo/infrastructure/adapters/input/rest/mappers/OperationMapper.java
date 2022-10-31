@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(uses = DateMapper.class)
 public interface OperationMapper {
 
@@ -18,4 +20,6 @@ public interface OperationMapper {
 
     @Mapping(target = "financeId", source = "finance.id")
     OperationResponseDTO operationToOperationResponseDTO(final Operation operation);
+
+    List<OperationResponseDTO> operationsToOperationResponsesDTO(final List<Operation> operations);
 }

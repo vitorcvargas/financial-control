@@ -2,25 +2,18 @@ package com.financialctl.financialinfo.infrastructure.adapters.output.persistenc
 
 import com.financialctl.financialinfo.domain.models.Operation;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.OperationDB;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = FinanceDBMapper.class)
+import java.util.List;
+
+@Mapper
 public interface OperationDBMapper {
 
     OperationDBMapper INSTANCE = Mappers.getMapper(OperationDBMapper.class);
 
-    @Mappings({
-            @Mapping(target = "finance.operations", ignore = true),
-            @Mapping(target = "finance.user", ignore = true)
-    })
-    OperationDB operationToOperationDB(final Operation operation);
+    OperationDB operationToOperationDB(final Operation operation, @Context CycleAvoidingMappingContext context);
 
-    @Mappings({
-            @Mapping(target = "finance.operations", ignore = true),
-            @Mapping(target = "finance.user", ignore = true)
-    })
-    Operation operationDBToOperation(final OperationDB operationDB);
+    Operation operationDBToOperation(final OperationDB operationDB, @Context CycleAvoidingMappingContext context);
 }

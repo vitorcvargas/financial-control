@@ -1,28 +1,17 @@
 package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "finance")
 public class FinanceDB {
 
     @Id
-    @SequenceGenerator(
-            name = "finance_sequence",
-            sequenceName = "finance_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "finance_sequence"
-    )
     @Column(
             name = "id",
             updatable = false
@@ -30,15 +19,15 @@ public class FinanceDB {
     private Long id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
-    @JsonBackReference
+    @MapsId
+    @JoinColumn(name = "id")
+    @JsonIgnore
     private UserDB user;
 
     @OneToMany(
             cascade = ALL,
             mappedBy = "finance"
     )
-    @JsonManagedReference
     private List<OperationDB> operations;
 
     public FinanceDB() {

@@ -1,11 +1,7 @@
 package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
@@ -37,12 +33,7 @@ public class UserDB {
     )
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "finance_id",
-            referencedColumnName = "id"
-    )
-    @JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private FinanceDB finance;
 
     public UserDB() {

@@ -9,7 +9,7 @@ public class User {
 
     public void addFinance(final Finance finance) {
         finance.setUser(this);
-        this.setFinance(finance);
+        this.finance = finance;
     }
 
     public User() {

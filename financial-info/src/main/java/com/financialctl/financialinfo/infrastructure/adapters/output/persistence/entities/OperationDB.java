@@ -1,6 +1,6 @@
 package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.enums.OperationEntryDB;
 
 import javax.persistence.*;
@@ -55,7 +55,7 @@ public class OperationDB {
             name = "finance_id",
             nullable = false
     )
-    @JsonBackReference
+    @JsonIgnore
     private FinanceDB finance;
 
     public OperationDB() {
