@@ -1,13 +1,10 @@
 package com.financialctl.financialinfo.infrastructure.adapters.input.rest.dtos.operation;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
+import com.financialctl.financialinfo.infrastructure.adapters.input.rest.dtos.finance.FinanceDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
 
 public class OperationRequestDTO {
 
@@ -27,37 +24,30 @@ public class OperationRequestDTO {
     @NotNull
     @Schema(
             description = "Operation date",
-            example = "2020-07-03@01:03:34.467+08:00"
+            example = "2020-07-03TAmerica/Sao_Paulo"
     )
-    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSXXX")
-    @JsonSerialize(using = ZonedDateTimeSerializer.class)
-    private ZonedDateTime date;
+    private String date;
 
     @NotNull
     @Schema(
             description = "Operation entry type",
-            example = "1"
+            example = "TRANSPORTATION"
     )
     @JsonProperty("operation_entry")
-    private int operationEntryType;
+    private String operationEntryType;
 
     @NotNull
-    @Schema(
-            description = "Finance id",
-            example = "1"
-    )
-    @JsonProperty("finance_id")
-    private Long financeId;
+    private FinanceDTO finance;
 
     public OperationRequestDTO() {
     }
 
-    public OperationRequestDTO(final Double amount, final String description, final ZonedDateTime date, final int operationEntryType, final Long financeId) {
+    public OperationRequestDTO(final Double amount, final String description, final String date, final String operationEntryType, final FinanceDTO finance) {
         this.amount = amount;
         this.description = description;
         this.date = date;
         this.operationEntryType = operationEntryType;
-        this.financeId = financeId;
+        this.finance = finance;
     }
 
     public Double getAmount() {
@@ -76,28 +66,28 @@ public class OperationRequestDTO {
         this.description = description;
     }
 
-    public ZonedDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(final ZonedDateTime date) {
+    public void setDate(final String date) {
         this.date = date;
     }
 
-    public int getOperationEntryType() {
+    public String getOperationEntryType() {
         return operationEntryType;
     }
 
-    public void setOperationEntryType(final int operationEntryType) {
+    public void setOperationEntryType(final String operationEntryType) {
         this.operationEntryType = operationEntryType;
     }
 
-    public Long getFinanceId() {
-        return financeId;
+    public FinanceDTO getFinance() {
+        return finance;
     }
 
-    public void setFinance(final Long financeId) {
-        this.financeId = financeId;
+    public void setFinance(final FinanceDTO finance) {
+        this.finance = finance;
     }
 
     @Override
@@ -105,9 +95,9 @@ public class OperationRequestDTO {
         return "OperationRequestDTO{" +
                 "amount=" + amount +
                 ", description='" + description + '\'' +
-                ", date=" + date +
-                ", operationEntry=" + operationEntryType +
-                ", financeId=" + financeId +
+                ", date='" + date + '\'' +
+                ", operationEntryType=" + operationEntryType +
+                ", finance=" + finance +
                 '}';
     }
 }

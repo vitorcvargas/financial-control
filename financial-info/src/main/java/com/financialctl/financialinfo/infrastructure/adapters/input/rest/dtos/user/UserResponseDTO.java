@@ -1,5 +1,6 @@
 package com.financialctl.financialinfo.infrastructure.adapters.input.rest.dtos.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public class UserResponseDTO {
@@ -22,10 +23,18 @@ public class UserResponseDTO {
     )
     private String email;
 
-    public UserResponseDTO(final Long id, final String name, final String email) {
+    @Schema(
+            description = "Finance id",
+            example = "1"
+    )
+    @JsonProperty("finance_id")
+    private Long financeId;
+
+    public UserResponseDTO(final Long id, final String name, final String email, final Long financeId) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.financeId = financeId;
     }
 
     public String getName() {
@@ -52,12 +61,21 @@ public class UserResponseDTO {
         this.id = id;
     }
 
+    public Long getFinanceId() {
+        return financeId;
+    }
+
+    public void setFinanceId(final Long financeId) {
+        this.financeId = financeId;
+    }
+
     @Override
     public String toString() {
         return "UserResponseDTO{" +
-                "userId=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", financeId=" + financeId +
                 '}';
     }
 }
