@@ -77,8 +77,8 @@ public class WindowDTO {
     @Override
     public String toString() {
         return "Window{" +
-                "startDate=" + fromDate +
-                ", endDate=" + toDate +
+                "fromDate=" + fromDate +
+                ", toDate=" + toDate +
                 ", fromAmount=" + fromAmount +
                 ", toAmount=" + toAmount +
                 '}';

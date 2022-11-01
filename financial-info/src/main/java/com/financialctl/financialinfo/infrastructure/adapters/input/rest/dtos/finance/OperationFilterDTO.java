@@ -62,7 +62,7 @@ public class OperationFilterDTO {
     public String toString() {
         return "OperationFilterDTO{" +
                 "operationEntryTypes=" + operationEntryTypes +
-                ", windowDTO=" + window +
+                ", window=" + window +
                 ", descriptions=" + descriptions +
                 '}';
     }
