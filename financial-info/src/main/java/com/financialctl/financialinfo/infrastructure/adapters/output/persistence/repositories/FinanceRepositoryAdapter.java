@@ -3,6 +3,7 @@ package com.financialctl.financialinfo.infrastructure.adapters.output.persistenc
 import com.financialctl.financialinfo.application.ports.outbound.repositories.FinanceRepository;
 import com.financialctl.financialinfo.domain.models.Finance;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.FinanceDB;
+import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.CycleAvoidingMappingContext;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.FinanceDBMapper;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.repositories.jpa.FinanceRepositoryJPA;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,6 @@ public class FinanceRepositoryAdapter implements FinanceRepository {
     }
 
     private Finance financeDBToFinance(final FinanceDB financeDB) {
-        return FinanceDBMapper.INSTANCE.financeDBToFinance(financeDB);
+        return FinanceDBMapper.INSTANCE.financeDBToFinance(financeDB, new CycleAvoidingMappingContext());
     }
 }

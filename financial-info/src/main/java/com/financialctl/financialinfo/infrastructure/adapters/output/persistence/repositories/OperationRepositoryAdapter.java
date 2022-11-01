@@ -3,6 +3,7 @@ package com.financialctl.financialinfo.infrastructure.adapters.output.persistenc
 import com.financialctl.financialinfo.application.ports.outbound.repositories.OperationRepository;
 import com.financialctl.financialinfo.domain.models.Operation;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.OperationDB;
+import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.CycleAvoidingMappingContext;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.OperationDBMapper;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.repositories.jpa.OperationRepositoryJPA;
 import org.springframework.stereotype.Repository;
@@ -37,10 +38,10 @@ public class OperationRepositoryAdapter implements OperationRepository {
     }
 
     private Operation operationDBToOperation(final OperationDB operationDB) {
-        return OperationDBMapper.INSTANCE.operationDBToOperation(operationDB);
+        return OperationDBMapper.INSTANCE.operationDBToOperation(operationDB, new CycleAvoidingMappingContext());
     }
 
     private OperationDB operationToOperationDB(final Operation operation) {
-        return OperationDBMapper.INSTANCE.operationToOperationDB(operation);
+        return OperationDBMapper.INSTANCE.operationToOperationDB(operation, new CycleAvoidingMappingContext());
     }
 }

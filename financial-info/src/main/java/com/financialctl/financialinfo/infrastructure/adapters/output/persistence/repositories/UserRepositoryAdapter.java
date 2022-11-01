@@ -3,6 +3,7 @@ package com.financialctl.financialinfo.infrastructure.adapters.output.persistenc
 import com.financialctl.financialinfo.application.ports.outbound.repositories.UserRepository;
 import com.financialctl.financialinfo.domain.models.User;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.UserDB;
+import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.CycleAvoidingMappingContext;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.mappers.UserDBMapper;
 import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.repositories.jpa.UserRepositoryJPA;
 import org.springframework.stereotype.Repository;
@@ -37,10 +38,10 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     private User userDBToUser(final UserDB userDB) {
-        return UserDBMapper.INSTANCE.userDBToUser(userDB);
+        return UserDBMapper.INSTANCE.userDBToUser(userDB, new CycleAvoidingMappingContext());
     }
 
     private UserDB userDBToUser(final User user) {
-        return UserDBMapper.INSTANCE.userToUserDB(user);
+        return UserDBMapper.INSTANCE.userToUserDB(user, new CycleAvoidingMappingContext());
     }
 }
