@@ -1,6 +1,7 @@
 package com.financialctl.financialinfo.domain.models;
 
 import com.financialctl.financialinfo.domain.models.enums.OperationEntry;
+import com.financialctl.financialinfo.domain.models.enums.OperationType;
 
 import java.time.ZonedDateTime;
 import java.util.Comparator;
@@ -24,13 +25,9 @@ public class Finance {
                 .filter(operation -> filterOperationDate(operation.getDate(), window))
                 .filter(operation -> filterOperationAmount(operation.getAmount(), window))
                 .filter(operation -> filterDescriptions(operation.getDescription(), filter.getDescriptions()))
-                .filter(operation -> filterOperationEntries(operation.getOperationEntryType(), filter.getOperationEntryTypes()))
+                .filter(operation -> filterOperations(operation.getOperationEntryType(), filter))
                 .sorted(Comparator.comparing(Operation::getDate).reversed())
                 .collect(Collectors.toList());
-    }
-
-    private boolean filterOperationEntries(final OperationEntry operationEntryType, final List<OperationEntry> operationEntriesLookup) {
-        return isEmpty(operationEntriesLookup) || operationEntriesLookup.contains(operationEntryType);
     }
 
     private boolean filterDescriptions(final String description, final List<String> descriptionsLookup) {
@@ -41,6 +38,21 @@ public class Finance {
     private boolean filterOperationAmount(final Double operationAmount, final Window window) {
         return (isNull(window.getFromAmount()) || isNull(window.getToAmount())) ||
                 (operationAmount >= window.getFromAmount() && operationAmount <= window.getToAmount());
+    }
+
+    private boolean filterOperations(final OperationEntry operationEntry, final OperationFilter filter) {
+        if (!isNull(filter.getOperationType()))
+            return filterOperationType(operationEntry.getOperationType(), filter.getOperationType());
+
+        return filterOperationEntries(operationEntry, filter.getOperationEntryTypes());
+    }
+
+    private boolean filterOperationType(final OperationType operationType, final OperationType operationTypeLookup) {
+        return operationType.equals(operationTypeLookup);
+    }
+
+    private boolean filterOperationEntries(final OperationEntry operationEntry, final List<OperationEntry> operationEntriesLookup) {
+        return isEmpty(operationEntriesLookup) || operationEntriesLookup.contains(operationEntry);
     }
 
     private boolean filterOperationDate(final ZonedDateTime operationDate, final Window window) {

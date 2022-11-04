@@ -49,18 +49,6 @@ public enum OperationEntry {
         return null;
     }
 
-    public List<OperationEntry> getIncomeEntries() {
-        return Arrays.stream(OperationEntry.values())
-                .filter(entry -> entry.getOperationType().name().equals("INCOME"))
-                .collect(Collectors.toList());
-    }
-
-    public List<OperationEntry> getExpenseEntries() {
-        return Arrays.stream(OperationEntry.values())
-                .filter(entry -> entry.getOperationType().name().equals("EXPENSE"))
-                .collect(Collectors.toList());
-    }
-
     public int getId() {
         return id;
     }
