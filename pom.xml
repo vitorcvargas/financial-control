@@ -20,6 +20,7 @@
 
     <modules>
         <module>financial-info</module>
+        <module>financial-alert</module>
     </modules>
 
 </project>
