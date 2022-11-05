@@ -17,14 +17,23 @@ public interface UserOpenApi {
     })
     ResponseEntity<UserResponseDTO> createUser(final UserRequestDTO userPostDto);
 
-    @Operation(summary = "Gets an user")
+    @Operation(summary = "Gets an user containing a given id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "405", description = "Method Not Allowed")
     })
-    ResponseEntity<UserResponseDTO> getUser(final Long id);
+    ResponseEntity<UserResponseDTO> getUserById(final Long id);
+
+    @Operation(summary = "Gets an user containing a given email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "405", description = "Method Not Allowed")
+    })
+    ResponseEntity<UserResponseDTO> getUserByEmail(final String email);
 
     @Operation(summary = "Updates an user")
     @ApiResponses(value = {

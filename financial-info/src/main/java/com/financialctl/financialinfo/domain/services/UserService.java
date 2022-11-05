@@ -45,7 +45,7 @@ public class UserService implements UserServicePort {
         final Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty())
-            throw NotFoundException.userNotFound(id);
+            throw NotFoundException.userNotFoundWithId(id);
 
         userRepository.delete(id);
     }
@@ -57,6 +57,12 @@ public class UserService implements UserServicePort {
     @Override
     public User get(final Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> NotFoundException.userNotFound(id));
+                .orElseThrow(() -> NotFoundException.userNotFoundWithId(id));
+    }
+
+    @Override
+    public User getUserByEmail(final String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> NotFoundException.userNotFoundWithEmail(email));
     }
 }

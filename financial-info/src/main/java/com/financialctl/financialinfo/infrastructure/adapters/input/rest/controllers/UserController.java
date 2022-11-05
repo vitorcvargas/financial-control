@@ -45,13 +45,26 @@ public class UserController implements UserOpenApi {
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponseDTO> getUser(@NotNull @PathVariable final Long id) {
+    public ResponseEntity<UserResponseDTO> getUserById(@NotNull @PathVariable final Long id) {
         logger.info(REQUEST_RECEIVED, "getUser", GET, id);
 
         final User user = service.get(id);
         final UserResponseDTO userResponseDTO = userToResponse(user);
 
         logger.info(REQUEST_RESPONSE_WITH_BODY, "getUser", OK.value(), userResponseDTO);
+
+        return ResponseEntity.status(OK).body(userResponseDTO);
+    }
+
+    @GetMapping()
+    @Override
+    public ResponseEntity<UserResponseDTO> getUserByEmail(@NotNull @RequestParam final String email) {
+        logger.info(REQUEST_RECEIVED, "getUserByEmail", GET, email);
+
+        final User user = service.getUserByEmail(email);
+        final UserResponseDTO userResponseDTO = userToResponse(user);
+
+        logger.info(REQUEST_RESPONSE_WITH_BODY, "getUserByEmail", OK.value(), userResponseDTO);
 
         return ResponseEntity.status(OK).body(userResponseDTO);
     }

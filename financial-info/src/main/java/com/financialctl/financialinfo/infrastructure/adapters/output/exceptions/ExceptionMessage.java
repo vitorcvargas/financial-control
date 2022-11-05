@@ -5,7 +5,9 @@ public enum ExceptionMessage {
     USER_ALREADY_CREATED(1, "A user with the email %s was already created."),
     FINANCE_NOT_FOUND(2, "Finance not found with id %s."),
     OPERATION_NOT_FOUND(3, "Operation not found with id %s."),
-    USER_NOT_FOUND(4, "User not found with id %s.");
+    USER_NOT_FOUND_WITH_ID(4, "User not found with id %s."),
+    USER_NOT_FOUND_WITH_EMAIL(5, "User not found with email %s.");
+
 
     private int code;
     private String message;

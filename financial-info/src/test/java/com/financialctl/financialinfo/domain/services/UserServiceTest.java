@@ -149,4 +149,32 @@ class UserServiceTest {
         verify(userRepository, times(1))
                 .findById(anyLong());
     }
+
+    @Test
+    @DisplayName("Should return user when user object is present with given email")
+    void shouldReturnUserWhenUserIsPresentWithGivenEmail() {
+
+        when(userRepository.findByEmail(any()))
+                .thenReturn(Optional.of(new User()));
+
+        userService.getUserByEmail("user@email.com");
+
+        verify(userRepository, times(1))
+                .findByEmail(any());
+    }
+
+    @Test
+    @DisplayName("Should throw NotFoundException when User does not exist with given email")
+    void shouldThrowNotFoundExceptionWhenUserDoesNotExistWithGivenEmail() {
+
+        when(userRepository.findByEmail(any()))
+                .thenReturn(Optional.ofNullable(null));
+
+        final NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> userService.getUserByEmail("some@email.com"));
+
+        assertThat(notFoundException.getMessage()).isEqualTo("User not found with email some@email.com.");
+
+        verify(userRepository, times(1))
+                .findByEmail(any());
+    }
 }

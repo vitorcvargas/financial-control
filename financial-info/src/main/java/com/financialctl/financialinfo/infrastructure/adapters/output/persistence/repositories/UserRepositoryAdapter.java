@@ -41,6 +41,12 @@ public class UserRepositoryAdapter implements UserRepository {
         return UserDBMapper.INSTANCE.userDBToUser(userDB, new CycleAvoidingMappingContext());
     }
 
+    @Override
+    public Optional<User> findByEmail(final String email) {
+        final Optional<UserDB> optional = repository.findByEmail(email);
+        return Optional.ofNullable(userDBToUser(optional.orElse(null)));
+    }
+
     private UserDB userDBToUser(final User user) {
         return UserDBMapper.INSTANCE.userToUserDB(user, new CycleAvoidingMappingContext());
     }
