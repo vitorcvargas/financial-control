@@ -42,7 +42,7 @@ public class OperationDB {
     private String description;
 
     @Column(
-            name = "date",
+            name = "operation_date",
             nullable = false
     )
     private ZonedDateTime date;

@@ -5,9 +5,12 @@ import com.financialctl.financialinfo.application.ports.outbound.repositories.Fi
 import com.financialctl.financialinfo.domain.models.Finance;
 import com.financialctl.financialinfo.domain.models.Operation;
 import com.financialctl.financialinfo.domain.models.OperationFilter;
+import com.financialctl.financialinfo.domain.models.OperationTotal;
+import com.financialctl.financialinfo.domain.models.enums.OperationEntry;
 import com.financialctl.financialinfo.infrastructure.adapters.output.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 public class FinanceService implements FinanceServicePort {
 
@@ -29,5 +32,15 @@ public class FinanceService implements FinanceServicePort {
                 .orElseThrow(() -> NotFoundException.financeNotFound(filter.getFinanceId()));
 
         return finance.filterOperations(filter);
+    }
+
+    @Override
+    public Map<OperationEntry, Double> createBudget(final Long id, final Map<OperationEntry, Double> budget) {
+        return null;
+    }
+
+    @Override
+    public void handleBudget(final Operation operation) {
+
     }
 }

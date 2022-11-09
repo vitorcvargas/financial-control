@@ -14,13 +14,13 @@ services:
     networks:
       - financial-info
     environment:
-      - FINANCIAL_INFO_DB_URL=jdbc:mysql://mysql:3306/financial_info?useSSL=false
+      - FINANCIAL_INFO_DB_URL=jdbc:mysql://mysql:3306/financial_info?allowPublicKeyRetrieval=true&useSSL=false
       - FINANCIAL_INFO_DB_USERNAME=root
       - FINANCIAL_INFO_DB_PASSWORD=root
       - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0.31
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=root

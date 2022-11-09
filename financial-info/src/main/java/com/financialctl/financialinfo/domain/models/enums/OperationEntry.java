@@ -1,9 +1,5 @@
 package com.financialctl.financialinfo.domain.models.enums;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static com.financialctl.financialinfo.domain.models.enums.OperationType.EXPENSE;
 import static com.financialctl.financialinfo.domain.models.enums.OperationType.INCOME;
 

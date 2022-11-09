@@ -1,9 +1,11 @@
 package com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.financialctl.financialinfo.infrastructure.adapters.output.persistence.entities.enums.OperationEntryDB;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -30,6 +32,12 @@ public class FinanceDB {
     )
     private List<OperationDB> operations;
 
+    @ElementCollection
+    @CollectionTable(name = "budget", joinColumns = @JoinColumn(name = "finance_id"))
+    @MapKeyColumn(name = "entry_type")
+    @Column(name = "budget_limit")
+    private Map<OperationEntryDB, Double> budget;
+
     public FinanceDB() {
     }
 
@@ -38,10 +46,11 @@ public class FinanceDB {
         this.operations = operations;
     }
 
-    public FinanceDB(final Long id, final UserDB user, final List<OperationDB> operations) {
+    public FinanceDB(final Long id, final UserDB user, final List<OperationDB> operations, final Map<OperationEntryDB, Double> budget) {
         this.id = id;
         this.user = user;
         this.operations = operations;
+        this.budget = budget;
     }
 
     public Long getId() {
@@ -68,12 +77,21 @@ public class FinanceDB {
         this.operations = operations;
     }
 
+    public Map<OperationEntryDB, Double> getBudget() {
+        return budget;
+    }
+
+    public void setBudget(final Map<OperationEntryDB, Double> budget) {
+        this.budget = budget;
+    }
+
     @Override
     public String toString() {
         return "FinanceDB{" +
                 "id=" + id +
                 ", user=" + user +
                 ", operations=" + operations +
+                ", budget=" + budget +
                 '}';
     }
 }

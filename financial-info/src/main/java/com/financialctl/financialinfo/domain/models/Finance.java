@@ -5,7 +5,9 @@ import com.financialctl.financialinfo.domain.models.enums.OperationType;
 
 import java.time.ZonedDateTime;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
@@ -17,6 +19,26 @@ public class Finance {
     private Long id;
     private User user;
     private List<Operation> operations;
+    private Map<OperationEntry, Double> budget = new HashMap<>();
+
+    public void addBudgetKey(final OperationEntry key, final Double value) {
+        budget.put(key, value);
+    }
+
+    public void removeBudgetKey(final OperationEntry key) {
+        budget.remove(key);
+    }
+
+    public void updateBudgetKey(final OperationEntry key, final Double value) {
+        if (budget.containsKey(key))
+            budget.replace(key, value);
+
+        budget.put(key, value);
+    }
+
+    public boolean containsBudgetKey(final OperationEntry key) {
+        return budget.containsKey(key);
+    }
 
     public List<Operation> filterOperations(final OperationFilter filter) {
         final Window window = filter.getWindow();
@@ -68,10 +90,11 @@ public class Finance {
         this.operations = operations;
     }
 
-    public Finance(final Long id, final User user, final List<Operation> operations) {
+    public Finance(final Long id, final User user, final List<Operation> operations, final Map<OperationEntry, Double> budget) {
         this.id = id;
         this.user = user;
         this.operations = operations;
+        this.budget = budget;
     }
 
     public Long getId() {
@@ -98,13 +121,19 @@ public class Finance {
         this.operations = operations;
     }
 
+    public Map<OperationEntry, Double> getBudget() {
+        return budget;
+    }
+
+    public void setBudget(final Map<OperationEntry, Double> budget) {
+        this.budget = budget;
+    }
 
     @Override
     public String toString() {
         return "Finance{" +
                 "id=" + id +
                 ", user=" + user +
-                ", operations=" + operations +
                 '}';
     }
 }
