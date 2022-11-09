@@ -8,6 +8,10 @@ public class FinancialAlertApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinancialAlertApplication.class, args);
+		//TODO create alert model
+		//TODO create alert sending structure (multiple alert sending ways)
+		//TODO create REST
+		//TODO create consumer
 	}
 
 }

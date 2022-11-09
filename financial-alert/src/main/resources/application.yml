@@ -1,0 +1,7 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri: ${FINANCIAL_ALERT_DB_URI}

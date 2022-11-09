@@ -103,7 +103,6 @@
             <scope>runtime</scope>
         </dependency>
 
-
         <!-- MAPSTRUCT -->
         <dependency>
             <groupId>org.mapstruct</groupId>

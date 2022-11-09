@@ -22,13 +22,13 @@ services:
   mysql:
     image: mysql:8.0.31
     restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=financial_info
     ports:
       - 3307:3306
     networks:
       - financial-info
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=financial_info
 
 networks:
   financial-info:
