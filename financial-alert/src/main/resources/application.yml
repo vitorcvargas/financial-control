@@ -5,3 +5,5 @@ spring:
   data:
     mongodb:
       uri: ${FINANCIAL_ALERT_DB_URI}
+      authentication-database: admin
+      database: financial_alert

@@ -3,7 +3,7 @@ version: "3.8"
 services:
   financial-alert-api:
     depends_on:
-      - mongo
+      - mongodb
     build:
       context: ../
       dockerfile: Dockerfile.dev
@@ -14,11 +14,12 @@ services:
     networks:
       - financial-alert
     environment:
-      - FINANCIAL_ALERT_DB_URI=mongodb://root:password@mongo:27017/financial_alert
+      - FINANCIAL_ALERT_DB_URI=mongodb://mongodb/financial_alert
       - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
-  mongo:
-    image: bitnami/mongodb
+  mongodb:
+    image: bitnami/mongodb:latest
+    container_name: "mongodb"
     restart: always
     ports:
       - 27017:27017
@@ -27,7 +28,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=financial_alert
 
 networks:
   financial-alert:
